@@ -58,4 +58,44 @@ database management, user interface design, navigation between activities and wo
 The project also demonstrates how application logic can be used to solve a practical problem, which is helping users manage
 their pantry ingredients and identify recipes they can prepare with what they have available.
 
+Screenshots 
+The following screenshots  will show the main features and screens of this   Smart Pantry Manager  application.
+1. Pantry Home Screen
+
+![Pantry Home Screen](screenshots/01pantryhomescreen.png)
+
+
+
+2. Add ingredient
+
+![Add ingredient](screenshot/02addingredient.png)
+
+
+
+
+3. Suggested Recipes
+
+![ Suggested Recipes](screenshot/03suggestedrecipes.png)
+ 
+
+
+
+4. Recipe Details
+
+![ Recipe Details](screenshot/04recipedetails.png)
+
+
+5. Settings Screen
+
+![ Settings Screen](screenshot/05settingsscreen.png)
+
+
+6. Input Validation
+
+![ Input Validation](screenshot/06inputvalidation.png)
+
+
+
+
+
 
