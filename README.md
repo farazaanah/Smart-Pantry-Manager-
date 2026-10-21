@@ -68,31 +68,31 @@ The following screenshots  will show the main features and screens of this   Sma
 
 2. Add ingredient
 
-![Add ingredient](screenshot/02addingredient.png)
+![Add ingredient](screenshots/02addingredient.png)
 
 
 
 
 3. Suggested Recipes
 
-![ Suggested Recipes](screenshot/03suggestedrecipes.png)
+![ Suggested Recipes](screenshots/03suggestedrecipes.png)
  
 
 
 
 4. Recipe Details
 
-![ Recipe Details](screenshot/04recipedetails.png)
+![ Recipe Details](screenshots/04recipedetails.png)
 
 
 5. Settings Screen
 
-![ Settings Screen](screenshot/05settingsscreen.png)
+![ Settings Screen](screenshots/05settingsscreen.png)
 
 
 6. Input Validation
 
-![ Input Validation](screenshot/06inputvalidation.png)
+![ Input Validation](screenshots/06inputvalidation.png)
 
 
 
