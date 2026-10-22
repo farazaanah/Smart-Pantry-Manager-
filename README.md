@@ -96,11 +96,11 @@ The following screenshots  will show the main features and screens of this   Sma
 
 7. Recipe Details
 
-![Recipe Details](screenshots/07recipedetails)
+![Recipe Details](screenshots/07recipedetails.png)
 
 8.Settings
 
-![Settings](screenshot/08settings)
+![Settings](screenshots/08settings.png)
 
 
 
