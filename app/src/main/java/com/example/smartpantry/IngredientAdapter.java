@@ -1,90 +1,67 @@
 package com.example.smartpantry;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder> {
 
-    private final ArrayList<Ingredient> ingredients;
+    private final List<Ingredient> ingredients;
+    private final OnIngredientActionListener listener;
 
-    public IngredientAdapter(ArrayList<Ingredient> ingredients) {
+    public interface OnIngredientActionListener {
+        void onEdit(Ingredient ingredient);
+        void onDelete(Ingredient ingredient);
+    }
+
+    public IngredientAdapter(List<Ingredient> ingredients,
+                             OnIngredientActionListener listener) {
         this.ingredients = ingredients;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public IngredientViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                   int viewType) {
+    public IngredientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_2, parent, false);
+                .inflate(R.layout.item_ingredient, parent, false);
         return new IngredientViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngredientViewHolder holder,
-                                 int position) {
+    public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         Ingredient ingredient = ingredients.get(position);
 
-        holder.nameText.setText(ingredient.getName());
-        holder.detailsText.setText(
-                ingredient.getQuantity() + " " + ingredient.getUnit()
-                        + " | Expiry: " + ingredient.getExpiryDate());
+        holder.tvName.setText(ingredient.getName());
+        holder.tvQuantity.setText(
+                "Quantity: " + ingredient.getQuantity() + " " + ingredient.getUnit()
+        );
 
-        holder.itemView.setOnClickListener(v -> {
-            Context context = v.getContext();
-            Intent intent = new Intent(context, AddEditIngredientActivity.class);
-            intent.putExtra("ingredient_id", ingredient.getId());
-            intent.putExtra("ingredient_name", ingredient.getName());
-            intent.putExtra("ingredient_quantity", ingredient.getQuantity());
-            intent.putExtra("ingredient_unit", ingredient.getUnit());
-            intent.putExtra("ingredient_expiry", ingredient.getExpiryDate());
-            context.startActivity(intent);
+        String expiry = ingredient.getExpiryDate();
+
+        if (expiry == null || expiry.trim().isEmpty()) {
+            holder.tvExpiry.setText("Expiry date: Not set");
+        } else {
+            holder.tvExpiry.setText("Expiry date: " + expiry);
+        }
+
+        holder.btnEdit.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onEdit(ingredient);
+            }
         });
 
-        holder.itemView.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(v.getContext())
-                    .setTitle("Delete Ingredient")
-                    .setMessage("Delete " + ingredient.getName() + "?")
-                    .setPositiveButton("Delete", (dialog, which) -> {
-                        DatabaseHelper databaseHelper =
-                                new DatabaseHelper(v.getContext());
-
-                        boolean deleted = databaseHelper.deleteIngredient(
-                                ingredient.getId());
-
-                        if (deleted) {
-                            int currentPosition =
-                                    holder.getAdapterPosition();
-
-                            if (currentPosition != RecyclerView.NO_POSITION) {
-                                ingredients.remove(currentPosition);
-                                notifyItemRemoved(currentPosition);
-                            }
-
-                            Toast.makeText(v.getContext(),
-                                    "Ingredient deleted",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(v.getContext(),
-                                    "Could not delete ingredient",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
-
-            return true;
+        holder.btnDelete.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onDelete(ingredient);
+            }
         });
     }
 
@@ -94,15 +71,19 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     }
 
     static class IngredientViewHolder extends RecyclerView.ViewHolder {
-        TextView nameText;
-        TextView detailsText;
+
+        TextView tvName, tvQuantity, tvExpiry;
+        Button btnEdit, btnDelete;
 
         IngredientViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameText = itemView.findViewById(android.R.id.text1);
-            detailsText = itemView.findViewById(android.R.id.text2);
+
+            tvName = itemView.findViewById(R.id.tvIngredientName);
+            tvQuantity = itemView.findViewById(R.id.tvIngredientQuantity);
+            tvExpiry = itemView.findViewById(R.id.tvIngredientExpiry);
+            btnEdit = itemView.findViewById(R.id.btnEditIngredient);
+            btnDelete = itemView.findViewById(R.id.btnDeleteIngredient);
         }
     }
 }
-
 

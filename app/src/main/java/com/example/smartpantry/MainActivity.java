@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private RecyclerView rvIngredients;
     private TextView tvEmptyPantry;
+    private TextView tvIngredientCount;
     private IngredientAdapter adapter;
     private ArrayList<Ingredient> ingredients;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         rvIngredients = findViewById(R.id.rvIngredients);
         tvEmptyPantry = findViewById(R.id.tvEmptyPantry);
+        tvIngredientCount = findViewById(R.id.tvIngredientCount);
 
         Button btnAddIngredient =
                 findViewById(R.id.btnAddIngredient);
@@ -51,17 +53,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSuggestedRecipes.setOnClickListener(v -> {
-            Intent recipeIntent = new Intent(
+            Intent intent = new Intent(
                     MainActivity.this,
                     SuggestedRecipesActivity.class);
-            startActivity(recipeIntent);
+            startActivity(intent);
         });
 
         btnSettings.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(
+            Intent intent = new Intent(
                     MainActivity.this,
                     SettingsActivity.class);
-            startActivity(settingsIntent);
+            startActivity(intent);
         });
     }
 
@@ -105,8 +107,37 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
         }
 
-        adapter = new IngredientAdapter(ingredients);
+        adapter = new IngredientAdapter(ingredients, new IngredientAdapter.OnIngredientActionListener() {
+            @Override
+            public void onEdit(Ingredient ingredient) {
+                android.content.Intent intent = new android.content.Intent(
+                        MainActivity.this, AddEditIngredientActivity.class);
+
+                intent.putExtra("ingredient_id", ingredient.getId());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onDelete(Ingredient ingredient) {
+                new android.app.AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Delete Ingredient")
+                        .setMessage("Are you sure you want to delete " + ingredient.getName() + "?")
+                        .setPositiveButton("Delete", (dialog, which) -> {
+                            databaseHelper.deleteIngredient(ingredient.getId());
+                            loadIngredients();
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+        });
         rvIngredients.setAdapter(adapter);
+
+        int count = ingredients.size();
+
+        tvIngredientCount.setText(
+                count + (count == 1
+                        ? " ingredient"
+                        : " ingredients"));
 
         if (ingredients.isEmpty()) {
             tvEmptyPantry.setVisibility(View.VISIBLE);
@@ -117,4 +148,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 

@@ -3,54 +3,151 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#F7F0E3"
     android:padding="16dp">
 
-    <TextView
+    <!-- App header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Smart Pantry"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        android:padding="18dp"
+        android:background="#111318">
 
-    <Button
-        android:id="@+id/btnAddIngredient"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SMART PANTRY MANAGER"
+            android:textColor="#1677FF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.08" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your kitchen, organised."
+            android:textColor="#FFFFFF"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage your ingredients and find your next meal."
+            android:textColor="#D5D8DF"
+            android:textSize="13sp"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+    <!-- Pantry heading and count -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Ingredient" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="18dp"
+        android:paddingBottom="12dp">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnSuggestedRecipes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Suggested Recipes"
-        android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Ingredients"
+                android:textColor="#111318"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvIngredientCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 ingredients"
+                android:textColor="#1677FF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="3dp" />
 
-    <Button
-        android:id="@+id/btnSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        android:layout_marginTop="8dp" />
+        </LinearLayout>
 
+        <Button
+            android:id="@+id/btnAddIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Add Ingredient"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:backgroundTint="#1677FF"
+            android:minWidth="0dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:contentDescription="Add Ingredient" />
+
+    </LinearLayout>
+
+    <!-- Empty pantry message -->
     <TextView
         android:id="@+id/tvEmptyPantry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your pantry is empty. Add your first ingredient!"
-        android:textSize="16sp"
+        android:text="Your pantry is empty.\nTap Add Ingredient to get started!"
+        android:textColor="#555555"
+        android:textSize="15sp"
         android:gravity="center"
-        android:padding="20dp"
+        android:padding="24dp"
+        android:background="#FFFFFF"
         android:visibility="gone" />
 
+    <!-- Independently scrolling ingredient list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvIngredients"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="8dp" />
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical" />
+
+    <!-- Bottom navigation actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp">
+
+        <Button
+            android:id="@+id/btnSuggestedRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Suggest Recipes"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:backgroundTint="#1677FF"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Settings"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:backgroundTint="#111318" />
+
+    </LinearLayout>
 
 </LinearLayout>
 

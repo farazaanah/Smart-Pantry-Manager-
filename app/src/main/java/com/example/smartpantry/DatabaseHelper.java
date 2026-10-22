@@ -30,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_QUANTITY + " REAL NOT NULL, " +
                 COL_UNIT + " TEXT NOT NULL, " +
                 COL_EXPIRY + " TEXT)";
+
         db.execSQL(createTable);
     }
 
@@ -42,6 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addIngredient(String name, double quantity,
                                  String unit, String expiryDate) {
         SQLiteDatabase db = getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(COL_NAME, name);
         values.put(COL_QUANTITY, quantity);
@@ -54,30 +56,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllIngredients() {
         SQLiteDatabase db = getReadableDatabase();
-        return db.query(TABLE_INGREDIENTS, null, null, null,
-                null, null, COL_NAME + " ASC");
+
+        return db.query(
+                TABLE_INGREDIENTS,
+                null,
+                null,
+                null,
+                null,
+                null,
+                COL_NAME + " ASC"
+        );
     }
 
     public boolean updateIngredient(int id, String name, double quantity,
                                     String unit, String expiryDate) {
         SQLiteDatabase db = getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(COL_NAME, name);
         values.put(COL_QUANTITY, quantity);
         values.put(COL_UNIT, unit);
         values.put(COL_EXPIRY, expiryDate);
 
-        int result = db.update(TABLE_INGREDIENTS, values,
-                COL_ID + "=?", new String[]{String.valueOf(id)});
+        int result = db.update(
+                TABLE_INGREDIENTS,
+                values,
+                COL_ID + "=?",
+                new String[]{String.valueOf(id)}
+        );
+
         return result > 0;
     }
 
     public boolean deleteIngredient(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        int result = db.delete(TABLE_INGREDIENTS,
-                COL_ID + "=?", new String[]{String.valueOf(id)});
+
+        int result = db.delete(
+                TABLE_INGREDIENTS,
+                COL_ID + "=?",
+                new String[]{String.valueOf(id)}
+        );
+
         return result > 0;
     }
 }
-
 
