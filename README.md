@@ -60,9 +60,9 @@ their pantry ingredients and identify recipes they can prepare with what they ha
 
 Screenshots 
 The following screenshots  will show the main features and screens of this   Smart Pantry Manager  application.
-1. Pantry Home Screen
+1. Ingredient list
 
-![Pantry Home Screen](screenshots/01pantryhomescreen.png)
+![Ingredient list](screenshots/01ingredientlist.png)
 
 
 
@@ -73,26 +73,34 @@ The following screenshots  will show the main features and screens of this   Sma
 
 
 
-3. Suggested Recipes
+3. Edit ingredient
 
-![ Suggested Recipes](screenshots/03suggestedrecipes.png)
+![ Edit ingredient](screenshots/03editingredient.png)
  
 
 
 
-4. Recipe Details
+4. Delete Confirmation
 
-![ Recipe Details](screenshots/04recipedetails.png)
-
-
-5. Settings Screen
-
-![ Settings Screen](screenshots/05settingsscreen.png)
+![ Delete Confirmation](screenshots/04deleteconfirmation.png)
 
 
-6. Input Validation
+5. Validation error
 
-![ Input Validation](screenshots/06inputvalidation.png)
+![ Validation  error](screenshots/05validationerror.png)
+
+
+6. Suggested Recipes
+
+![ Suggested Recipes](screenshots/06suggestedrecipes.png)
+
+7. Recipe Details
+
+![Recipe Details](screenshots/07recipedetails)
+
+8.Settings
+
+![Settings](screenshot/08settings)
 
 
 
